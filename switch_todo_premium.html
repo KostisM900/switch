@@ -1,0 +1,141 @@
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+.app{background:#fff;font-family:'Space Grotesk',sans-serif;min-height:600px;}
+.header{padding:16px 20px 14px;border-bottom:1.5px solid #111;display:flex;align-items:center;justify-content:space-between;}
+.logo-img{height:30px;display:block;object-fit:contain;}
+.date-lbl{font-family:'DM Serif Display',serif;font-style:italic;font-size:14px;color:#aaa;letter-spacing:0.2px;}
+.mood-row{padding:12px 20px;border-bottom:1px solid #ebebeb;display:flex;gap:6px;overflow-x:auto;}
+.mood-row::-webkit-scrollbar{display:none;}
+.chip{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:#bbb;border:1px solid #e4e4e4;padding:6px 14px;border-radius:2px;cursor:pointer;white-space:nowrap;background:#fff;transition:all 0.15s;}
+.chip.active{background:#111;color:#fff;border-color:#111;}
+.sess{padding:14px 20px;background:#fafafa;border-bottom:1px solid #ebebeb;display:flex;align-items:center;justify-content:space-between;}
+.t-lbl{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#ccc;display:block;margin-bottom:4px;}
+.t-disp{font-family:'DM Serif Display',serif;font-size:32px;color:#111;letter-spacing:0px;line-height:1;}
+.t-btn{background:#111;color:#fff;border:none;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:10px 22px;border-radius:2px;cursor:pointer;transition:opacity 0.15s;}
+.t-btn:hover{opacity:0.7;}
+.inp-row{padding:16px 20px;border-bottom:1.5px solid #111;display:flex;gap:12px;align-items:center;}
+.t-inp{flex:1;background:transparent;border:none;font-family:'DM Serif Display',serif;font-style:italic;font-size:19px;color:#111;outline:none;padding:2px 0;}
+.t-inp::placeholder{color:#ddd;font-style:italic;}
+.add-b{width:32px;height:32px;background:#111;color:#fff;border:none;border-radius:2px;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity 0.15s;line-height:1;}
+.add-b:hover{opacity:0.7;}
+.prog-row{padding:12px 20px 0;display:flex;align-items:center;gap:12px;}
+.p-track{flex:1;height:1px;background:#eee;}
+.p-fill{height:1px;background:#111;transition:width 0.4s ease;}
+.p-lbl{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:500;letter-spacing:1.5px;color:#ccc;white-space:nowrap;text-transform:uppercase;}
+.tasks{padding:0 0 40px;}
+.sec-h{padding:20px 20px 6px;}
+.sec-t{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:#ccc;}
+.t-item{display:flex;align-items:flex-start;gap:14px;padding:13px 20px;border-bottom:1px solid #f4f4f4;transition:background 0.1s;}
+.t-item:hover{background:#fafafa;}
+.t-item.done-item .t-txt{text-decoration:line-through;color:#d0d0d0;}
+.chk{margin-top:4px;width:16px;height:16px;border:1px solid #ccc;border-radius:2px;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.15s;}
+.chk.on{background:#111;border-color:#111;}
+.cm{display:none;width:8px;height:5px;border-left:1.5px solid #fff;border-bottom:1.5px solid #fff;transform:rotate(-45deg) translate(1px,-1px);}
+.chk.on .cm{display:block;}
+.t-body{flex:1;min-width:0;}
+.t-txt{font-family:'DM Serif Display',serif;font-size:17px;color:#111;line-height:1.35;}
+.t-tag{display:inline-block;margin-top:3px;font-family:'Space Grotesk',sans-serif;font-size:9px;color:#ccc;letter-spacing:2px;text-transform:uppercase;}
+.d-btn{background:none;border:none;color:#e0e0e0;font-size:13px;cursor:pointer;padding:2px;flex-shrink:0;margin-top:2px;transition:color 0.15s;font-family:'Space Grotesk',sans-serif;}
+.d-btn:hover{color:#111;}
+.empty{text-align:center;padding:48px 20px;}
+.empty-main{font-family:'DM Serif Display',serif;font-style:italic;font-size:20px;color:#ddd;}
+.empty-sub{margin-top:6px;font-size:11px;font-family:'Space Grotesk',sans-serif;letter-spacing:1.5px;text-transform:uppercase;color:#e8e8e8;}
+</style>
+
+<div class="app">
+  <div class="header">
+    <img src="https://i.imgur.com/BcG2r7S.png" alt="Switch" class="logo-img" id="logoImg">
+    <span class="date-lbl" id="dateLbl"></span>
+  </div>
+
+  <div class="mood-row">
+    <div class="chip active" onclick="setMood(this,'deep work')">deep work</div>
+    <div class="chip" onclick="setMood(this,'study')">study</div>
+    <div class="chip" onclick="setMood(this,'creative')">creative</div>
+    <div class="chip" onclick="setMood(this,'meetings')">meetings</div>
+    <div class="chip" onclick="setMood(this,'chill')">chill</div>
+  </div>
+
+  <div class="sess">
+    <div>
+      <span class="t-lbl">session</span>
+      <span class="t-disp" id="timer">00:00</span>
+    </div>
+    <button class="t-btn" id="tBtn">Start</button>
+  </div>
+
+  <div class="inp-row">
+    <input class="t-inp" id="tInp" placeholder="what are you working on?" maxlength="80" onkeydown="if(event.key==='Enter')addTask()">
+    <button class="add-b" onclick="addTask()">+</button>
+  </div>
+
+  <div class="prog-row">
+    <div class="p-track"><div class="p-fill" id="pFill" style="width:0%"></div></div>
+    <span class="p-lbl" id="pLbl">0 / 0</span>
+  </div>
+
+  <div class="tasks">
+    <div class="sec-h"><span class="sec-t" id="todoH">To Do</span></div>
+    <div id="todoList"></div>
+    <div class="sec-h" id="doneSec" style="display:none;"><span class="sec-t">Completed</span></div>
+    <div id="doneList"></div>
+  </div>
+</div>
+
+<script>
+let tasks=[];let tSec=0;let tOn=false;let tInt=null;let mood='deep work';
+const mos=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const dys=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const n=new Date();
+document.getElementById('dateLbl').textContent=dys[n.getDay()]+' '+mos[n.getMonth()]+' '+n.getDate();
+document.getElementById('logoImg').onerror=function(){this.style.display='none';};
+
+function setMood(el,m){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');mood=m;}
+
+function addTask(){
+  const inp=document.getElementById('tInp');
+  const txt=inp.value.trim();if(!txt)return;
+  tasks.push({id:Date.now(),text:txt,done:false,mood});inp.value='';render();
+}
+
+function toggleTask(id){const t=tasks.find(x=>x.id===id);if(t)t.done=!t.done;render();}
+function deleteTask(id){tasks=tasks.filter(x=>x.id!==id);render();}
+
+function render(){
+  const todo=tasks.filter(t=>!t.done);
+  const done=tasks.filter(t=>t.done);
+  const tot=tasks.length;const dn=done.length;
+  const pct=tot?Math.round(dn/tot*100):0;
+  document.getElementById('pFill').style.width=pct+'%';
+  document.getElementById('pLbl').textContent=dn+' / '+tot;
+  document.getElementById('todoH').textContent='To Do  ('+todo.length+')';
+  document.getElementById('doneSec').style.display=dn?'block':'none';
+  document.getElementById('todoList').innerHTML=todo.length?todo.map(ih).join(''):'<div class="empty"><div class="empty-main">nothing here yet</div><div class="empty-sub">add your first task above</div></div>';
+  document.getElementById('doneList').innerHTML=done.map(ih).join('');
+}
+
+function ih(t){
+  const s=t.text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  return`<div class="t-item${t.done?' done-item':''}">
+    <div class="chk${t.done?' on':''}" onclick="toggleTask(${t.id})"><div class="cm"></div></div>
+    <div class="t-body"><div class="t-txt">${s}</div><div class="t-tag">${t.mood}</div></div>
+    <button class="d-btn" onclick="deleteTask(${t.id})">✕</button>
+  </div>`;
+}
+
+let phase='idle';
+document.getElementById('tBtn').onclick=function(){
+  if(phase==='idle'){
+    phase='running';this.textContent='Stop';
+    tInt=setInterval(()=>{tSec++;const m=String(Math.floor(tSec/60)).padStart(2,'0');const s=String(tSec%60).padStart(2,'0');document.getElementById('timer').textContent=m+':'+s;},1000);
+  }else if(phase==='running'){
+    phase='stopped';clearInterval(tInt);this.textContent='Reset';
+  }else{
+    phase='idle';tSec=0;document.getElementById('timer').textContent='00:00';this.textContent='Start';
+  }
+};
+
+render();
+</script>
