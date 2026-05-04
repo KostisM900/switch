@@ -2,47 +2,42 @@
 <html lang="el">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Switch — To Do</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-html,body{height:100%;background:#f0f0f0;display:flex;align-items:center;justify-content:center;}
-.phone-wrap{width:390px;min-height:844px;background:#fff;display:flex;flex-direction:column;font-family:'Space Grotesk',sans-serif;overflow:hidden;}
+html,body{background:#fff;font-family:'Space Grotesk',sans-serif;min-height:100vh;}
 
-.header{padding:52px 24px 16px;border-bottom:1.5px solid #111;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.header{padding:56px 24px 16px;border-bottom:1.5px solid #111;display:flex;align-items:center;justify-content:space-between;}
 .logo-img{height:28px;display:block;object-fit:contain;}
 .date-lbl{font-family:'DM Serif Display',serif;font-style:italic;font-size:14px;color:#aaa;}
 
-.mood-row{padding:14px 24px;border-bottom:1px solid #ebebeb;display:flex;gap:6px;overflow-x:auto;flex-shrink:0;}
+.mood-row{padding:14px 24px;border-bottom:1px solid #ebebeb;display:flex;gap:6px;overflow-x:auto;}
 .mood-row::-webkit-scrollbar{display:none;}
 .chip{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:#bbb;border:1px solid #e4e4e4;padding:7px 14px;border-radius:2px;cursor:pointer;white-space:nowrap;background:#fff;transition:all 0.15s;}
 .chip.active{background:#111;color:#fff;border-color:#111;}
 
-.sess{padding:16px 24px;background:#fafafa;border-bottom:1px solid #ebebeb;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.sess{padding:16px 24px;background:#fafafa;border-bottom:1px solid #ebebeb;display:flex;align-items:center;justify-content:space-between;}
 .t-lbl{font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#ccc;display:block;margin-bottom:4px;}
 .t-disp{font-family:'DM Serif Display',serif;font-size:34px;color:#111;line-height:1;}
-.t-btn{background:#111;color:#fff;border:none;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:12px 24px;border-radius:2px;cursor:pointer;transition:opacity 0.15s;}
-.t-btn:hover{opacity:0.7;}
+.t-btn{background:#111;color:#fff;border:none;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:12px 24px;border-radius:2px;cursor:pointer;}
 
-.inp-row{padding:18px 24px;border-bottom:1.5px solid #111;display:flex;gap:12px;align-items:center;flex-shrink:0;}
+.inp-row{padding:18px 24px;border-bottom:1.5px solid #111;display:flex;gap:12px;align-items:center;}
 .t-inp{flex:1;background:transparent;border:none;font-family:'DM Serif Display',serif;font-style:italic;font-size:20px;color:#111;outline:none;padding:2px 0;}
 .t-inp::placeholder{color:#ddd;}
-.add-b{width:36px;height:36px;background:#111;color:#fff;border:none;border-radius:2px;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity 0.15s;}
-.add-b:hover{opacity:0.7;}
+.add-b{width:36px;height:36px;background:#111;color:#fff;border:none;border-radius:2px;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 
-.prog-row{padding:14px 24px 0;display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.prog-row{padding:14px 24px 0;display:flex;align-items:center;gap:12px;}
 .p-track{flex:1;height:1px;background:#eee;}
 .p-fill{height:1px;background:#111;transition:width 0.4s ease;}
 .p-lbl{font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:500;letter-spacing:1.5px;color:#ccc;white-space:nowrap;text-transform:uppercase;}
 
-.tasks{flex:1;overflow-y:auto;padding-bottom:40px;}
-.tasks::-webkit-scrollbar{display:none;}
+.tasks{padding-bottom:60px;}
 .sec-h{padding:22px 24px 6px;}
 .sec-t{font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:#ccc;}
 
-.t-item{display:flex;align-items:flex-start;gap:14px;padding:15px 24px;border-bottom:1px solid #f4f4f4;transition:background 0.1s;}
-.t-item:active{background:#fafafa;}
+.t-item{display:flex;align-items:flex-start;gap:14px;padding:15px 24px;border-bottom:1px solid #f4f4f4;}
 .t-item.done-item .t-txt{text-decoration:line-through;color:#d0d0d0;}
 .chk{margin-top:4px;width:17px;height:17px;border:1px solid #ccc;border-radius:2px;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.15s;}
 .chk.on{background:#111;border-color:#111;}
@@ -51,15 +46,14 @@ html,body{height:100%;background:#f0f0f0;display:flex;align-items:center;justify
 .t-body{flex:1;min-width:0;}
 .t-txt{font-family:'DM Serif Display',serif;font-size:18px;color:#111;line-height:1.35;}
 .t-tag{display:inline-block;margin-top:3px;font-family:'Space Grotesk',sans-serif;font-size:9px;color:#ccc;letter-spacing:2px;text-transform:uppercase;}
-.d-btn{background:none;border:none;color:#e0e0e0;font-size:13px;cursor:pointer;padding:2px;flex-shrink:0;margin-top:3px;transition:color 0.15s;}
-.d-btn:hover{color:#111;}
+.d-btn{background:none;border:none;color:#e0e0e0;font-size:13px;cursor:pointer;padding:2px;flex-shrink:0;margin-top:3px;}
+
 .empty{text-align:center;padding:56px 24px;}
 .empty-main{font-family:'DM Serif Display',serif;font-style:italic;font-size:22px;color:#ddd;}
 .empty-sub{margin-top:8px;font-size:10px;font-family:'Space Grotesk',sans-serif;letter-spacing:1.5px;text-transform:uppercase;color:#e8e8e8;}
 </style>
 </head>
 <body>
-<div class="phone-wrap">
   <div class="header">
     <img src="https://i.imgur.com/BcG2r7S.png" alt="Switch" class="logo-img" id="logoImg">
     <span class="date-lbl" id="dateLbl"></span>
@@ -97,7 +91,6 @@ html,body{height:100%;background:#f0f0f0;display:flex;align-items:center;justify
     <div class="sec-h" id="doneSec" style="display:none;"><span class="sec-t">Completed</span></div>
     <div id="doneList"></div>
   </div>
-</div>
 
 <script>
 let tasks=[];let tSec=0;let tInt=null;let phase='idle';let mood='deep work';
